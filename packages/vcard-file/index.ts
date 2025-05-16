@@ -38,7 +38,18 @@ export class VCardGenerator {
       .replace(/\n/g, '\\n');
   }
 
-  generateVCard(options: ContactOptions): string {
+  private async convertImgBase64(url: string) {
+    try {
+      const response = await fetch(url);
+      const data = await response.arrayBuffer();
+      return Buffer.from(data).toString('base64');
+    } catch {
+      return '';
+    }
+  }
+
+  async generateVCard(options: ContactOptions): Promise<string> {
+    const photo = await this.convertImgBase64(options.photo);
     const vcardContent = this.template
       .replace('%%NAME%%', options.name)
       .replace('%%ADDRESS%%', options.address)
@@ -49,7 +60,7 @@ export class VCardGenerator {
       .replace('%%JTITLE%%', options.jtitle)
       .replace('%%WURL%%', options.wurl)
       .replace('%%PURL%%', options.purl)
-      .replace('%%PHOTO%%', options.photo)
+      .replace('%%PHOTO%%', photo)
       .replace('%%NOTE%%', this.escapeText(options.note || ''));
     return vcardContent;
   }
