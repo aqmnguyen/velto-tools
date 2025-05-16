@@ -1,70 +1,153 @@
 # @velto/ics-file
 
-A Node package for generating ICS (iCalendar) files with support for recurring events.
+A Node.js package for generating ICS (iCalendar) files.
 
 ## Installation
 
 ```bash
 npm install @velto/ics-file
+# or
+yarn add @velto/ics-file
+# or
+bun add @velto/ics-file
 ```
 
 ## Usage
 
+### Basic Usage
+
 ```typescript
 import ICSGenerator from '@velto/ics-file';
 
-// Create an instance of the generator
-const generator = new ICSGenerator();
+const icsGenerator = new ICSGenerator();
 
-// Generate an ICS file
-const options = {
-  startDate: new Date('2024-03-20T10:00:00Z'), // Date should be in UTC
-  endDate: new Date('2024-03-20T11:00:00Z'), // Date should be in UTC
+// Generate ICS content
+const icsContent = icsGenerator.generateICS({
+  startDate: new Date('2024-03-20T10:00:00Z'),
+  endDate: new Date('2024-03-20T11:00:00Z'),
   summary: 'Team Meeting',
   description: 'Weekly team sync',
   location: 'Conference Room A',
-  recurringRule: 'FREQ=WEEKLY;COUNT=10', // Optional: Add recurring rule
-};
+});
 
-// Generate ICS content as string
-const icsContent = generator.generateICS(options);
-
-// Or save directly to a file
-generator.generateICSFile(options, 'event.ics');
+// Generate download response
+const { content, headers } = icsGenerator.downloadICSFile(
+  {
+    startDate: new Date('2024-03-20T10:00:00Z'),
+    endDate: new Date('2024-03-20T11:00:00Z'),
+    summary: 'Team Meeting',
+    description: 'Weekly team sync',
+    location: 'Conference Room A',
+  },
+  {
+    filename: 'meeting.ics',
+    contentType: 'text/calendar',
+  }
+);
 ```
 
-## API
+### API
 
-### ICSGenerator
-
-#### Constructor
-
-```typescript
-new ICSGenerator();
-```
-
-#### Methods
-
-##### generateICS(options: EventOptions): string
+#### `generateICS(options: EventOptions): string`
 
 Generates ICS content as a string.
 
-##### generateICSFile(options: EventOptions, outputPath: string): void
-
-Generates and saves ICS content to a file.
-
-### EventOptions Interface
-
 ```typescript
 interface EventOptions {
-  startDate: Date; // Event start date and time
-  endDate: Date; // Event end date and time
-  summary: string; // Event title
-  description: string; // Event description
-  location: string; // Event location
-  recurringRule?: string; // Optional recurring rule (RRULE format)
+  startDate: Date;
+  endDate: Date;
+  summary: string;
+  description: string;
+  location: string;
+  recurringRule?: string;
 }
 ```
+
+#### `downloadICSFile(options: EventOptions, downloadOptions?: DownloadOptions): { content: string, headers: Record<string, string> }`
+
+Generates ICS content and returns it with appropriate download headers.
+
+```typescript
+interface DownloadOptions {
+  filename?: string; // Default: 'event.ics'
+  contentType?: string; // Default: 'text/calendar'
+}
+```
+
+Returns an object with:
+
+- `content`: The ICS file content as a string
+- `headers`: Object containing Content-Type and Content-Disposition headers
+
+### Example with Fastify
+
+```typescript
+import Fastify from 'fastify';
+import ICSGenerator from '@velto/ics-file';
+
+const app = Fastify();
+const icsGenerator = new ICSGenerator();
+
+app.get('/download', async (request, reply) => {
+  const { content, headers } = icsGenerator.downloadICSFile(
+    {
+      startDate: new Date('2024-03-20T10:00:00Z'),
+      endDate: new Date('2024-03-20T11:00:00Z'),
+      summary: 'Team Meeting',
+      description: 'Weekly team sync',
+      location: 'Conference Room A',
+    },
+    {
+      filename: 'meeting.ics',
+    }
+  );
+
+  // Set headers
+  Object.entries(headers).forEach(([key, value]) => {
+    reply.header(key, value);
+  });
+
+  // Send content
+  return reply.send(content);
+});
+```
+
+### Example with Express
+
+```typescript
+import express from 'express';
+import ICSGenerator from '@velto/ics-file';
+
+const app = express();
+const icsGenerator = new ICSGenerator();
+
+app.get('/download', (req, res) => {
+  const { content, headers } = icsGenerator.downloadICSFile(
+    {
+      startDate: new Date('2024-03-20T10:00:00Z'),
+      endDate: new Date('2024-03-20T11:00:00Z'),
+      summary: 'Team Meeting',
+      description: 'Weekly team sync',
+      location: 'Conference Room A',
+    },
+    {
+      filename: 'meeting.ics',
+    }
+  );
+
+  // Set headers
+  Object.entries(headers).forEach(([key, value]) => {
+    res.setHeader(key, value);
+  });
+
+  // Send content
+  res.send(content);
+});
+```
+
+## License
+
+MIT
 
 ## Recurring Rules
 

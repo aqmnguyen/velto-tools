@@ -11,6 +11,11 @@ interface EventOptions {
   recurringRule?: string;
 }
 
+interface DownloadOptions {
+  filename?: string;
+  contentType?: string;
+}
+
 export class ICSGenerator {
   private template: string;
 
@@ -43,19 +48,57 @@ export class ICSGenerator {
       .replace('%%DTSTART%%', this.formatDate(options.startDate))
       .replace('%%DTEND%%', this.formatDate(options.endDate))
       .replace('%%SUMMARY%%', this.escapeText(options.summary))
-      .replace('%%DESCRIPTION%%', this.escapeText(options.description))
-      .replace('%%LOCATION%%', this.escapeText(options.location))
+      .replace('%%DESCRIPTION%%', this.escapeText(options.description || ''))
+      .replace('%%LOCATION%%', this.escapeText(options.location || ''))
       .replace('%%RRULE%%', recurringRule);
 
     return icsContent;
   }
 
-  generateICSFile(
+  downloadICSFile(
     options: EventOptions,
-    outputPath: string = 'event.ics'
-  ): void {
-    const icsContent = this.generateICS(options);
-    fs.writeFileSync(outputPath, icsContent);
+    downloadOptions: DownloadOptions = {}
+  ) {
+    try {
+      if (!options.startDate || !options.endDate || !options.summary) {
+        throw new Error('Missing required fields');
+      }
+
+      if (
+        !(options.startDate instanceof Date) ||
+        !(options.endDate instanceof Date)
+      ) {
+        throw new Error('startDate and endDate must be instances of Date');
+      }
+
+      if (
+        typeof options.summary !== 'string' ||
+        typeof options.description !== 'string' ||
+        typeof options.location !== 'string'
+      ) {
+        throw new Error('summary, description, and location must be strings');
+      }
+      console.log(downloadOptions);
+      const icsContent = this.generateICS(options);
+      const filename = downloadOptions.filename || 'event.ics';
+
+      return {
+        error: false,
+        message: 'ICS file generated successfully',
+        content: icsContent,
+        headers: {
+          'Content-Type': 'text/calendar',
+          'Content-Disposition': `attachment; filename="${filename}"`,
+        },
+      };
+    } catch (e) {
+      return {
+        error: true,
+        message: e instanceof Error ? e.message : 'Unknown error occurred',
+        headers: {},
+        content: '',
+      };
+    }
   }
 }
 
