@@ -78,7 +78,7 @@ export class ICSGenerator {
       ) {
         throw new Error('summary, description, and location must be strings');
       }
-      console.log(downloadOptions);
+
       const icsContent = this.generateICS(options);
       const filename = downloadOptions.filename || 'event.ics';
 

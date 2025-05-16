@@ -1,0 +1,20 @@
+{
+  "name": "@velto/vcard-file",
+  "version": "1.0.0",
+  "description": "A Node package for generating VCard files",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist",
+    "template.vcard"
+  ]
+}

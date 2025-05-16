@@ -15,8 +15,8 @@ export const icsRoutes = async (fastify: FastifyInstance) => {
             startDate: { type: 'string', format: 'date-time' },
             endDate: { type: 'string', format: 'date-time' },
             summary: { type: 'string', minLength: 1 },
-            description: { type: 'string', minLength: 1 },
-            location: { type: 'string', minLength: 1 },
+            description: { type: 'string' },
+            location: { type: 'string' },
             filename: {
               type: 'string',
               default: 'event.ics',
