@@ -60,10 +60,6 @@ export class ICSGenerator {
     downloadOptions: DownloadOptions = {}
   ) {
     try {
-      if (!options.startDate || !options.endDate || !options.summary) {
-        throw new Error('Missing required fields');
-      }
-
       if (
         !(options.startDate instanceof Date) ||
         !(options.endDate instanceof Date)

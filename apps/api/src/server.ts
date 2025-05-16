@@ -4,6 +4,8 @@ import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import { healthRoutes } from './routes/health';
 import { icsRoutes } from './routes/ics';
+import { vcardRoutes } from './routes/vcard';
+
 import { errorHandler } from './plugins/error-handler';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3002;
@@ -39,6 +41,8 @@ server.setErrorHandler(errorHandler);
 // Register routes
 server.register(healthRoutes, { prefix: '/api' });
 server.register(icsRoutes, { prefix: '/api/ics' });
+server.register(vcardRoutes, { prefix: '/api/vcard' });
+
 // Start server
 const start = async () => {
   try {

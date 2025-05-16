@@ -46,12 +46,11 @@ export class VCardGenerator {
       .replace('%%COMPANY%%', options.company)
       .replace('%%FAX%%', options.fax)
       .replace('%%TEL%%', options.tel)
-      .replace('%%TITLE%%', options.jtitle)
+      .replace('%%JTITLE%%', options.jtitle)
       .replace('%%WURL%%', options.wurl)
       .replace('%%PURL%%', options.purl)
       .replace('%%PHOTO%%', options.photo)
       .replace('%%NOTE%%', this.escapeText(options.note || ''));
-
     return vcardContent;
   }
 
@@ -61,14 +60,14 @@ export class VCardGenerator {
   ) {
     try {
       const vcardContent = this.generateVCard(options);
-      const filename = downloadOptions.filename || 'contact.vcard';
+      const filename = downloadOptions.filename || 'contact.vcf';
 
       return {
         error: false,
         message: 'VCard file generated successfully',
         content: vcardContent,
         headers: {
-          'Content-Type': 'text/vcard',
+          'Content-Type': 'text/x-vcard',
           'Content-Disposition': `attachment; filename="${filename}"`,
         },
       };
