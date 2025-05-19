@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Providers } from '@/components/providers';
+import { Providers } from '@/components/Providers';
+import Navigation from '@/components/Navigation';
 import '@/styles/globals.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
 });
+
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
@@ -23,9 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className='dark'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navigation />
+
+          {children}
+        </Providers>
       </body>
     </html>
   );
