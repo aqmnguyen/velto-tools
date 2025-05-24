@@ -57,6 +57,7 @@
         "@repo/ui": "*",
         "@velto/ics-file": "workspace:*",
         "@velto/vcard-file": "workspace:*",
+        "dayjs": "^1.11.13",
         "framer-motion": "^12.12.1",
         "next": "^15.3.0",
         "react": "^19.1.0",

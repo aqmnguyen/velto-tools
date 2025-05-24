@@ -1,8 +1,9 @@
 import styles from '@/styles/page.module.css';
 import { Divider } from '@heroui/react';
 import IconComponent from '@/components/Icon';
-import ButtonComponent from '@/components/Button';
-import CalenderForm from '@/components/forms/CalenderForm';
+import CalenderForm, {
+  GoogleCalendarButton,
+} from '@/components/forms/CalenderForm';
 
 export const metadata = {
   title: 'Velto Tools - Attachment Generator',
@@ -34,7 +35,7 @@ export default function Home() {
           <div className='flex flex-col items-center gap-2'>
             <p className='text-small text-default-500'>Add to calendar</p>
             <div className='flex items-center gap-2'>
-              <ButtonComponent
+              {/* <ButtonComponent
                 className='bg-default-100'
                 isIconOnly={true}
                 size='sm'
@@ -44,19 +45,9 @@ export default function Home() {
                   icon='mdi:calendar-outline'
                   width={16}
                 />
-              </ButtonComponent>
+              </ButtonComponent> */}
 
-              <ButtonComponent
-                className='bg-default-100'
-                isIconOnly={true}
-                size='sm'
-              >
-                <IconComponent
-                  className='text-default-600'
-                  icon='mdi:google'
-                  width={16}
-                />
-              </ButtonComponent>
+              <GoogleCalendarButton />
             </div>
           </div>
         </div>
