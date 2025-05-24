@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className='flex w-[375px] flex-col items-center gap-5 rounded-large bg-default-50 py-8 shadow-small'>
+        <div className='flex w-[550 px] flex-col items-center gap-5 rounded-large bg-default-50 py-8 shadow-small'>
           <div className='flex w-full flex-col items-center px-8'>
             <IconComponent
               className='mb-3 text-success-500'
@@ -36,7 +36,7 @@ export default function Home() {
               >
                 <IconComponent
                   className='text-default-600'
-                  icon='mdi:google'
+                  icon='mdi:calendar-outline'
                   width={16}
                 />
               </ButtonComponent>
@@ -48,7 +48,7 @@ export default function Home() {
               >
                 <IconComponent
                   className='text-default-600'
-                  icon='mdi:calendar-outline'
+                  icon='mdi:google'
                   width={16}
                 />
               </ButtonComponent>
