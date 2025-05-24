@@ -133,24 +133,22 @@ export default function CalenderForm({
  * https://calendar.google.com/calendar/u/0/r/eventedit?text=Coffee+Catchup&dates=20250524T202412/20250524T222412&details=Just+a+general+chin+wag&location=The+Ned,+27+Poultry,+London+EC2R+8AJ&ctz=Europe/London
  */
 export function GenerateGoogleCalendarLink(id: string): string | void {
-  const form = document.getElementById(id);
-  if (!form || !(form instanceof HTMLFormElement)) {
-    console.log(`No valid form found with id ${id}`);
-    return;
-  }
-  const formData = new FormData(form);
-
-  const title = formData.get('title') || 'New Event';
-  const details = formData.get('details') || '';
-  const location = formData.get('location') || '';
-  const startDate = formData.get('startDate');
-  const endDate = formData.get('endDate');
-  const timezone =
-    formData.get('timezone') ||
-    Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const {
+    title = '',
+    details = '',
+    location = '',
+    startDate = '',
+    endDate = '',
+    timezone = '',
+  } = _getFormData(id);
 
   if (!startDate || !endDate) {
     console.log('Start date and end date are required');
+    return;
+  }
+
+  if (dayjs(endDate).isBefore(dayjs(startDate))) {
+    console.log('End date must be after start date');
     return;
   }
 
@@ -165,11 +163,11 @@ export function GenerateGoogleCalendarLink(id: string): string | void {
   const baseUrl = 'https://calendar.google.com/calendar/render';
   const params = new URLSearchParams({
     action: 'TEMPLATE',
-    text: title.toString(),
+    text: title,
     dates: `${googleStartDate}/${googleEndDate}`,
-    details: details.toString(),
-    location: location.toString(),
-    ctz: timezone.toString(),
+    details: details,
+    location: location,
+    ctz: timezone,
   });
 
   const calendarUrl = `${baseUrl}?${params.toString()}`;
@@ -188,4 +186,67 @@ export function GoogleCalendarButton() {
       <Icon className='text-default-600' icon='mdi:google' width={16} />
     </Button>
   );
+}
+
+export function GenerateICSAttachment(id: string): string | void {
+  const { title, details, location, startDate, endDate, timezone } =
+    _getFormData(id);
+
+  if (!startDate || !endDate) {
+    console.log('Start date and end date are required');
+    return;
+  }
+
+  if (dayjs(endDate).isBefore(dayjs(startDate))) {
+    console.log('End date must be after start date');
+    return;
+  }
+
+  return;
+}
+
+export function GenerateICSAttachmentButton() {
+  return (
+    <Button
+      className='bg-default-100'
+      isIconOnly={true}
+      size='sm'
+      onPress={() => GenerateICSAttachment('calender-form')}
+    >
+      <Icon className='text-default-600' icon='mdi:calendar' width={16} />
+    </Button>
+  );
+}
+
+function _getFormData(id: string): {
+  title: string;
+  details: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  timezone: string;
+} {
+  const form = document.getElementById(id);
+  if (!form || !(form instanceof HTMLFormElement)) {
+    console.log(`No valid form found with id ${id}`);
+    return {
+      title: '',
+      details: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    };
+  }
+  const formData = new FormData(form);
+  const title = String(formData.get('title') || 'New Event');
+  const details = String(formData.get('details') || '');
+  const location = String(formData.get('location') || '');
+  const startDate = String(formData.get('startDate') || '');
+  const endDate = String(formData.get('endDate') || '');
+  const timezone = String(
+    formData.get('timezone') || Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
+
+  return { title, details, location, startDate, endDate, timezone };
 }

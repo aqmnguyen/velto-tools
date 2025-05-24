@@ -3,6 +3,7 @@ import { Divider } from '@heroui/react';
 import IconComponent from '@/components/Icon';
 import CalenderForm, {
   GoogleCalendarButton,
+  GenerateICSAttachmentButton,
 } from '@/components/forms/CalenderForm';
 
 export const metadata = {
@@ -35,19 +36,8 @@ export default function Home() {
           <div className='flex flex-col items-center gap-2'>
             <p className='text-small text-default-500'>Add to calendar</p>
             <div className='flex items-center gap-2'>
-              {/* <ButtonComponent
-                className='bg-default-100'
-                isIconOnly={true}
-                size='sm'
-              >
-                <IconComponent
-                  className='text-default-600'
-                  icon='mdi:calendar-outline'
-                  width={16}
-                />
-              </ButtonComponent> */}
-
               <GoogleCalendarButton />
+              <GenerateICSAttachmentButton />
             </div>
           </div>
         </div>
