@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@heroui/react": "^2.7.8",
+    "@internationalized/date": "3.8.0",
     "@repo/ui": "*",
+    "@velto/ics-file": "workspace:*",
+    "@velto/vcard-file": "workspace:*",
     "framer-motion": "^12.12.1",
     "next": "^15.3.0",
     "react": "^19.1.0",
