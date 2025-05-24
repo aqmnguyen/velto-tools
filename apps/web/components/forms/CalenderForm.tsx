@@ -1,9 +1,15 @@
 'use client';
 
-import { DateRangePicker, Input, Select, SelectItem } from '@heroui/react';
+import {
+  DatePicker,
+  Input,
+  Autocomplete,
+  AutocompleteItem,
+} from '@heroui/react';
 import { parseAbsoluteToLocal } from '@internationalized/date';
+import { useState } from 'react';
 
-export default function CalenderForm() {
+export default function CalenderForm({ id = 'calender-form' }: { id: string }) {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
@@ -11,11 +17,19 @@ export default function CalenderForm() {
   const timezones = Intl.supportedValuesOf('timeZone').map((timezone) => ({
     label: timezone,
     key: timezone,
+    description: timezone.replace(/[^a-zA-Z0-9\s]/g, ' '),
   }));
+
+  const [startDate, setStartDate] = useState(
+    parseAbsoluteToLocal(today.toISOString())
+  );
+  const [endDate, setEndDate] = useState(
+    parseAbsoluteToLocal(tomorrow.toISOString())
+  );
 
   const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return (
-    <div className='flex w-full flex-col items-center gap-4 px-8'>
+    <div id={id} className='flex w-full flex-col items-center gap-4 px-8'>
       <form className='flex w-full flex-col gap-4'>
         <div className='flex w-full flex-col gap-1'>
           <p className='text-small font-medium' aria-label='title'>
@@ -45,25 +59,41 @@ export default function CalenderForm() {
           <p className='text-small font-medium'>When</p>
 
           <div className='flex w-full flex-col gap-2'>
-            <DateRangePicker
+            <DatePicker
               hideTimeZone={true}
               className='w-full'
-              defaultValue={{
-                start: parseAbsoluteToLocal(today.toISOString()),
-                end: parseAbsoluteToLocal(tomorrow.toISOString()),
-              }}
-              label='Date & Time'
-              labelPlacement='outside'
-              aria-label='date-range-picker'
+              granularity='second'
+              label='Start date & time'
+              value={startDate}
+              onChange={(value) => value && setStartDate(value)}
             />
-            <Select
+            <DatePicker
+              hideTimeZone={true}
+              className='w-full'
+              granularity='second'
+              label='End date & time'
+              value={endDate}
+              onChange={(value) => {
+                if (value) {
+                  setEndDate(value);
+                }
+              }}
+              isInvalid={endDate.compare(startDate) <= 0}
+              errorMessage='End date must be after start date'
+            />
+
+            <Autocomplete
               className='mt-2 w-full'
-              items={timezones}
+              defaultItems={timezones}
               label='Timezone'
-              defaultSelectedKeys={[currentTimezone]}
+              defaultSelectedKey={currentTimezone}
             >
-              {(timezone) => <SelectItem>{timezone.label}</SelectItem>}
-            </Select>
+              {(timezones) => (
+                <AutocompleteItem key={timezones.key}>
+                  {timezones.label}
+                </AutocompleteItem>
+              )}
+            </Autocomplete>
           </div>
         </div>
         <div className='flex w-full flex-col gap-1'>

@@ -4,6 +4,11 @@ import IconComponent from '@/components/Icon';
 import ButtonComponent from '@/components/Button';
 import CalenderForm from '@/components/forms/CalenderForm';
 
+export const metadata = {
+  title: 'Velto Tools - Attachment Generator',
+  description: 'Create calender invites in ICS or GCal format based on inputs.',
+};
+
 export default function Home() {
   return (
     <div className={styles.page}>
@@ -24,7 +29,7 @@ export default function Home() {
             </p>
           </div>
           <Divider className='w-full bg-default-200' />
-          <CalenderForm />
+          <CalenderForm id='calender-form' />
           <Divider className='w-full bg-default-100' />
           <div className='flex flex-col items-center gap-2'>
             <p className='text-small text-default-500'>Add to calendar</p>
