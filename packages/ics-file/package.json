@@ -9,7 +9,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.13",
+    "timezones-ical-library": "^1.10.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",
