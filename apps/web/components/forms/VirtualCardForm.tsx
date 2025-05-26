@@ -1,16 +1,28 @@
 'use client';
 
-import type { CardProps } from '@heroui/react';
-
 import React from 'react';
 import { Button, Avatar, Badge, Input } from '@heroui/react';
 import { Icon } from '@iconify/react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-export default function Component(props: CardProps) {
+export default function VirtualCardForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('/avatar.png');
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setAvatarUrl(imageUrl);
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,7 +35,6 @@ export default function Component(props: CardProps) {
 
   return (
     <div className='flex w-full flex-col items-center gap-4 px-8'>
-      <p className='text-large'>Account Details</p>
       <div className='flex gap-4 py-4'>
         <Badge
           showOutline
@@ -38,6 +49,7 @@ export default function Component(props: CardProps) {
               radius='full'
               size='sm'
               variant='light'
+              onPress={handleAvatarClick}
             >
               <Icon icon='solar:pen-2-linear' />
             </Button>
@@ -45,11 +57,16 @@ export default function Component(props: CardProps) {
           placement='bottom-right'
           shape='circle'
         >
-          <Avatar
-            className='h-14 w-14'
-            src='https://i.pravatar.cc/150?u=a04258114e29026708c'
-          />
+          <Avatar className='h-14 w-14' src={avatarUrl} />
         </Badge>
+        <input
+          type='file'
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept='image/*'
+          className='hidden'
+          name='avatar'
+        />
         <div className='flex flex-col items-start justify-center'>
           <p className='font-medium'>
             {firstName} {lastName}
@@ -71,6 +88,7 @@ export default function Component(props: CardProps) {
               placeholder='Enter first name'
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              name='firstName'
             />
             {/* Last Name */}
             <Input
@@ -79,6 +97,7 @@ export default function Component(props: CardProps) {
               placeholder='Enter last name'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              name='lastName'
             />
           </div>
           {/* Email */}
@@ -87,6 +106,7 @@ export default function Component(props: CardProps) {
             label='Email'
             placeholder='Enter email'
             type='email'
+            name='email'
           />
           <div className='grid grid-cols-2 gap-6'>
             {/* Phone Number */}
@@ -95,12 +115,14 @@ export default function Component(props: CardProps) {
               label='Phone Number'
               placeholder='Enter phone number'
               type='number'
+              name='phoneNumber'
             />
             <Input
               isRequired
               label='Fax Number'
               placeholder='Enter fax number'
               type='number'
+              name='faxNumber'
             />
           </div>
 
@@ -109,6 +131,7 @@ export default function Component(props: CardProps) {
               isRequired
               label='Company'
               placeholder='Enter company name'
+              name='company'
             />
 
             <Input
@@ -117,41 +140,42 @@ export default function Component(props: CardProps) {
               placeholder='Enter job title'
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
+              name='jobTitle'
             />
           </div>
 
-          <Input isRequired label='Street' placeholder='Enter street' />
+          <Input
+            isRequired
+            label='Street'
+            placeholder='Enter street'
+            name='street'
+          />
           <div className='grid grid-cols-2 gap-6'>
-            <Input isRequired label='City' placeholder='Enter city' />
-            <Input isRequired label='Zip Code' placeholder='Enter zip code' />
-          </div>
-          <Input isRequired label='State' placeholder='Enter state' />
-          <Input isRequired label='Country' placeholder='Enter country' />
-
-          {/* Country */}
-          {/* <Autocomplete
+            <Input
               isRequired
-              defaultItems={countries}
-              label="Country"
-              labelPlacement="outside"
-              placeholder="Select country"
-              showScrollIndicators={false}
-            >
-              {(item) => (
-                <AutocompleteItem
-                  key={item.code}
-                  startContent={
-                    <Avatar
-                      alt="Country Flag"
-                      className="h-6 w-6"
-                      src={`https://flagcdn.com/${item.code.toLowerCase()}.svg`}
-                    />
-                  }
-                >
-                  {item.name}
-                </AutocompleteItem>
-              )}
-            </Autocomplete> */}
+              label='City'
+              placeholder='Enter city'
+              name='city'
+            />
+            <Input
+              isRequired
+              label='Zip Code'
+              placeholder='Enter zip code'
+              name='zipCode'
+            />
+          </div>
+          <Input
+            isRequired
+            label='State'
+            placeholder='Enter state'
+            name='state'
+          />
+          <Input
+            isRequired
+            label='Country'
+            placeholder='Enter country'
+            name='country'
+          />
         </div>
 
         <div className='mt-6 flex w-full justify-center gap-2'>
