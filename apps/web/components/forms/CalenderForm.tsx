@@ -45,6 +45,7 @@ export default function CalenderForm({
             size='sm'
             name='title'
             aria-label='title'
+            isRequired={true}
           />
         </div>
         <div className='flex w-full flex-col gap-1'>
@@ -64,21 +65,21 @@ export default function CalenderForm({
 
           <div className='flex w-full flex-col gap-2'>
             <DatePicker
-              // hideTimeZone={true}
               className='w-full'
               granularity='second'
               label='Start date & time'
               value={startDate}
               name='startDate'
               onChange={(value) => value && setStartDate(value)}
+              isRequired={true}
             />
             <DatePicker
-              // hideTimeZone={true}
               className='w-full'
               granularity='second'
               label='End date & time'
               value={endDate}
               name='endDate'
+              isRequired={true}
               onChange={(value) => {
                 if (!value) return;
                 if (value.compare(startDate) <= 0) {
@@ -87,7 +88,6 @@ export default function CalenderForm({
                   setIsEndDateInvalid(false);
                   setEndDate(value);
                 }
-                return;
               }}
               isInvalid={isEndDateInvalid}
               errorMessage='End date must be after start date'
@@ -99,6 +99,7 @@ export default function CalenderForm({
               label='Timezone'
               defaultSelectedKey={currentTimezone}
               name='timezone'
+              isRequired={true}
             >
               {(timezones) => (
                 <AutocompleteItem key={timezones.key}>
@@ -188,21 +189,29 @@ export function GoogleCalendarButton() {
   );
 }
 
-export function GenerateICSAttachment(id: string): string | void {
-  const { title, details, location, startDate, endDate, timezone } =
-    _getFormData(id);
+export async function GenerateICSAttachment(
+  id: string
+): Promise<string | void> {
+  const formData = _getFormData(id);
 
-  if (!startDate || !endDate) {
+  if (!formData.startDate || !formData.endDate) {
     console.log('Start date and end date are required');
     return;
   }
 
-  if (dayjs(endDate).isBefore(dayjs(startDate))) {
+  if (dayjs(formData.endDate).isBefore(dayjs(formData.startDate))) {
     console.log('End date must be after start date');
     return;
   }
 
-  return;
+  try {
+    window.open(
+      '/api/ics?' + new URLSearchParams(formData).toString(),
+      '_blank'
+    );
+  } catch (error) {
+    console.error('Failed to generate ICS file:', error);
+  }
 }
 
 export function GenerateICSAttachmentButton() {
@@ -218,10 +227,15 @@ export function GenerateICSAttachmentButton() {
   );
 }
 
+/**
+ * Gets the form data from the form with the given id
+ * @param id - The id of the form
+ * @returns The form data in an object
+ */
 function _getFormData(id: string): {
   title: string;
-  details: string;
-  location: string;
+  details?: string;
+  location?: string;
   startDate: string;
   endDate: string;
   timezone: string;
@@ -239,7 +253,7 @@ function _getFormData(id: string): {
     };
   }
   const formData = new FormData(form);
-  const title = String(formData.get('title') || 'New Event');
+  const title = String(formData.get('title') || '');
   const details = String(formData.get('details') || '');
   const location = String(formData.get('location') || '');
   const startDate = String(formData.get('startDate') || '');
