@@ -1,12 +1,17 @@
 {
-  "name": "@velto/vcard-file",
+  "name": "@velto-tools/vcard-file",
   "version": "1.0.0",
   "description": "A Node package for generating VCard files",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {

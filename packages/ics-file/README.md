@@ -1,15 +1,15 @@
-# @velto/ics-file
+# @velto-tools/ics-file
 
 A Node.js package for generating ICS (iCalendar) files.
 
 ## Installation
 
 ```bash
-npm install @velto/ics-file
+npm install @velto-tools/ics-file
 # or
-yarn add @velto/ics-file
+yarn add @velto-tools/ics-file
 # or
-bun add @velto/ics-file
+bun add @velto-tools/ics-file
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ bun add @velto/ics-file
 ### Basic Usage
 
 ```typescript
-import ICSGenerator from '@velto/ics-file';
+import ICSGenerator from '@velto-tools/ics-file';
 
 const icsGenerator = new ICSGenerator();
 
@@ -83,7 +83,7 @@ Returns an object with:
 
 ```typescript
 import Fastify from 'fastify';
-import ICSGenerator from '@velto/ics-file';
+import ICSGenerator from '@velto-tools/ics-file';
 
 const app = Fastify();
 const icsGenerator = new ICSGenerator();
@@ -116,7 +116,7 @@ app.get('/download', async (request, reply) => {
 
 ```typescript
 import express from 'express';
-import ICSGenerator from '@velto/ics-file';
+import ICSGenerator from '@velto-tools/ics-file';
 
 const app = express();
 const icsGenerator = new ICSGenerator();

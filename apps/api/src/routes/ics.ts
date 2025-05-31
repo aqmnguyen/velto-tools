@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import ICSGenerator from '@velto/ics-file';
+import ICSGenerator from '@velto-tools/ics-file';
 
 export const icsRoutes = async (fastify: FastifyInstance) => {
   fastify.get(

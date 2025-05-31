@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import VCardGenerator from '@velto/vcard-file';
+import VCardGenerator from '@velto-tools/vcard-file';
 
 export const vcardRoutes = async (fastify: FastifyInstance) => {
   fastify.get(
