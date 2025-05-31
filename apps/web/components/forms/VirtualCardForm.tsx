@@ -20,21 +20,28 @@ export default function VirtualCardForm() {
   };
 
   return (
-    <div className='flex w-full flex-col items-center gap-4 px-8'>
-      <ProfileAvatar />
-      <div className='flex'>
-        <div className='flex flex-col items-start justify-center'>
-          <p className='font-medium'>
-            {firstName} {lastName}
-          </p>
-          <span className='text-small text-default-500'>{jobTitle}</span>
+    <div className='flex w-full px-8'>
+      <form
+        className='flex w-full flex-col items-center gap-4'
+        onSubmit={handleSubmit}
+        id='vcard-form'
+      >
+        <ProfileAvatar />
+
+        <div className='flex'>
+          <div className='flex flex-col items-start justify-center'>
+            <p className='font-medium'>
+              {firstName} {lastName}
+            </p>
+            <span className='text-small text-default-500'>{jobTitle}</span>
+          </div>
         </div>
-      </div>
-      <p className='text-small text-default-400'>
-        The photo will be used for your profile, and will be visible to other
-        users of the platform.
-      </p>
-      <form className='w-full' onSubmit={handleSubmit} id='vcard-form'>
+
+        <p className='text-small text-default-400'>
+          The photo will be used for your virtual card and will be visible to
+          others.
+        </p>
+
         <div className='flex w-full flex-col gap-6'>
           <div className='grid grid-cols-2 gap-6'>
             {/* First Name */}
@@ -58,7 +65,6 @@ export default function VirtualCardForm() {
           </div>
           {/* Email */}
           <Input
-            isRequired
             label='Email'
             placeholder='Enter email'
             type='email'
@@ -74,7 +80,6 @@ export default function VirtualCardForm() {
               name='phoneNumber'
             />
             <Input
-              isRequired
               label='Fax Number'
               placeholder='Enter fax number'
               type='number'
@@ -84,14 +89,12 @@ export default function VirtualCardForm() {
 
           <div className='grid grid-cols-2 gap-6'>
             <Input
-              isRequired
               label='Company'
               placeholder='Enter company name'
               name='company'
             />
 
             <Input
-              isRequired
               label='Job Title'
               placeholder='Enter job title'
               value={jobTitle}
@@ -100,41 +103,20 @@ export default function VirtualCardForm() {
             />
           </div>
 
-          <Input
-            isRequired
-            label='Street'
-            placeholder='Enter street'
-            name='street'
-          />
+          <Input label='Street' placeholder='Enter street' name='street' />
           <div className='grid grid-cols-2 gap-6'>
+            <Input label='City' placeholder='Enter city' name='city' />
             <Input
-              isRequired
-              label='City'
-              placeholder='Enter city'
-              name='city'
-            />
-            <Input
-              isRequired
               label='Zip Code'
               placeholder='Enter zip code'
               name='zipCode'
             />
           </div>
-          <Input
-            isRequired
-            label='State'
-            placeholder='Enter state'
-            name='state'
-          />
-          <Input
-            isRequired
-            label='Country'
-            placeholder='Enter country'
-            name='country'
-          />
+          <Input label='State' placeholder='Enter state' name='state' />
+          <Input label='Country' placeholder='Enter country' name='country' />
         </div>
 
-        <div className='mt-6 flex w-full justify-center gap-2'>
+        <div className='mt-2 flex w-full justify-center gap-2'>
           <Button
             color='primary'
             type='submit'
