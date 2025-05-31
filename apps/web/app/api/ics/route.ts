@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import ICSGenerator from '@velto/ics-file';
+import ICSGenerator from '@velto-tools/ics-file';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

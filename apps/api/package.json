@@ -10,8 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@velto/ics-file": "workspace:*",
-    "@velto/vcard-file": "workspace:*",
+    "@velto-tools/ics-file": "^1.0.1",
+    "@velto-tools/vcard-file": "^1.0.0",
     "@fastify/cors": "^8.4.1",
     "@fastify/env": "^4.2.0",
     "@fastify/swagger": "^8.12.1",
