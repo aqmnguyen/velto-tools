@@ -29,8 +29,6 @@ export default function VCard() {
             </p>
           </div>
           <Divider className='w-full bg-default-200' />
-          {/* VCard Form */}
-          {/* Account Details on HeroUI */}
           <VirtualCardForm />
         </div>
       </main>

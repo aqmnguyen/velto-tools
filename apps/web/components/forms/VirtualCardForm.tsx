@@ -1,28 +1,14 @@
 'use client';
 
 import React from 'react';
-import { Button, Avatar, Badge, Input } from '@heroui/react';
-import { Icon } from '@iconify/react';
-import { useState, useRef } from 'react';
+import { Button, Input } from '@heroui/react';
+import { useState } from 'react';
+import ProfileAvatar from '@/components/VirtualCard/ProfileAvatar';
 
 export default function VirtualCardForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('/avatar.png');
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleAvatarClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setAvatarUrl(imageUrl);
-    }
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,38 +21,8 @@ export default function VirtualCardForm() {
 
   return (
     <div className='flex w-full flex-col items-center gap-4 px-8'>
-      <div className='flex gap-4 py-4'>
-        <Badge
-          showOutline
-          classNames={{
-            badge: 'w-5 h-5',
-          }}
-          color='primary'
-          content={
-            <Button
-              isIconOnly
-              className='p-0 text-primary-foreground'
-              radius='full'
-              size='sm'
-              variant='light'
-              onPress={handleAvatarClick}
-            >
-              <Icon icon='solar:pen-2-linear' />
-            </Button>
-          }
-          placement='bottom-right'
-          shape='circle'
-        >
-          <Avatar className='h-14 w-14' src={avatarUrl} />
-        </Badge>
-        <input
-          type='file'
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          accept='image/*'
-          className='hidden'
-          name='avatar'
-        />
+      <ProfileAvatar />
+      <div className='flex'>
         <div className='flex flex-col items-start justify-center'>
           <p className='font-medium'>
             {firstName} {lastName}
