@@ -4,19 +4,65 @@ import React from 'react';
 import { Button, Input } from '@heroui/react';
 import { useState } from 'react';
 import ProfileAvatar from '@/components/VirtualCard/ProfileAvatar';
+import { useAvatarStore } from '@/stores/VirtualCard/useAvatarStore';
+
+type ContactData = {
+  name: string;
+  photo: string;
+  email: string;
+  company: string;
+  tel: string;
+  fax: string;
+  jTitle: string;
+  address: string;
+};
 
 export default function VirtualCardForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
+  const { avatarUrl: photo } = useAvatarStore();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
+    const {
+      jTitle,
+      company,
+      email,
+      tel,
+      fax,
+      street,
+      city,
+      zipCode,
+      state,
+      country,
+    } = data as Record<string, string>;
+    const name = `${firstName || ''} ${lastName || ''}`.trim();
+    const address =
+      `${street || ''} ${city || ''} ${zipCode || ''} ${state || ''} ${country || ''}`.trim();
 
-    console.log(data);
+    const contactData: ContactData = {
+      name,
+      photo,
+      email: email || '',
+      company: company || '',
+      tel: tel || '',
+      fax: fax || '',
+      jTitle: jTitle || '',
+      address,
+    };
+
+    try {
+      window.open(
+        `/api/vcard?${new URLSearchParams(contactData).toString()}`,
+        '_blank'
+      );
+    } catch (error) {
+      console.error('Failed to generate vCard:', error);
+    }
   };
 
   return (
@@ -40,6 +86,9 @@ export default function VirtualCardForm() {
         <p className='text-small text-default-400'>
           The photo will be used for your virtual card and will be visible to
           others.
+          <br />
+          Photos need to be a square (max width/height of 600px) and be under
+          1MB.
         </p>
 
         <div className='flex w-full flex-col gap-6'>
@@ -77,13 +126,13 @@ export default function VirtualCardForm() {
               label='Phone Number'
               placeholder='Enter phone number'
               type='number'
-              name='phoneNumber'
+              name='tel'
             />
             <Input
               label='Fax Number'
               placeholder='Enter fax number'
               type='number'
-              name='faxNumber'
+              name='fax'
             />
           </div>
 
@@ -99,7 +148,7 @@ export default function VirtualCardForm() {
               placeholder='Enter job title'
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              name='jobTitle'
+              name='jTitle'
             />
           </div>
 

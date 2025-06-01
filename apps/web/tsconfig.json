@@ -5,7 +5,10 @@
     "paths": {
       "@/*": ["./*"],
       "@/components/*": ["./components/*"],
-      "@/styles/*": ["./styles/*"]
+      "@/actions/*": ["./actions/*"],
+      "@/stores/*": ["./stores/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/utils/*": ["./utils/*"]
     },
     "plugins": [
       {

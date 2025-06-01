@@ -15,7 +15,7 @@
     "@internationalized/date": "3.8.0",
     "@repo/ui": "*",
     "@velto-tools/ics-file": "^1.0.1",
-    "@velto-tools/vcard-file": "^1.0.0",
+    "@velto-tools/vcard-file": "workspace:*",
     "@vercel/blob": "^1.1.1",
     "dayjs": "^1.11.13",
     "framer-motion": "^12.12.1",
@@ -23,7 +23,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "recharts": "^2.15.3",
-    "usehooks-ts": "^3.1.1"
+    "usehooks-ts": "^3.1.1",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@iconify/react": "^6.0.0",

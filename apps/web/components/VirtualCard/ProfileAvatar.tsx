@@ -1,14 +1,13 @@
 'use client';
 
 import { Avatar, Badge, Button } from '@heroui/react';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Icon } from '@iconify/react';
 import { uploadImage } from '@/actions/uploadImage';
+import { useAvatarStore } from '@/stores/VirtualCard/useAvatarStore';
 
 export default function ProfileAvatar() {
-  const [avatarUrl, setAvatarUrl] = useState(
-    'https://nnqgrjflsafxzt35.public.blob.vercel-storage.com/avatar/avatar-LMlRtQVFkwtjwRDKgXo7XuagbmoZyt.png'
-  );
+  const { avatarUrl, setAvatarUrl } = useAvatarStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validImageDimensions = async (file: File) => {
@@ -98,6 +97,7 @@ export default function ProfileAvatar() {
         accept='image/*'
         className='hidden'
         name='avatar'
+        data-default-url='https://nnqgrjflsafxzt35.public.blob.vercel-storage.com/avatar/avatar-LMlRtQVFkwtjwRDKgXo7XuagbmoZyt.png'
       />
     </div>
   );
