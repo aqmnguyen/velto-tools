@@ -29,29 +29,31 @@ export default function VirtualCardForm() {
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
     const {
-      jTitle,
-      company,
-      email,
-      tel,
-      fax,
-      street,
-      city,
-      zipCode,
-      state,
-      country,
+      jTitle = '',
+      company = '',
+      email = '',
+      tel = '',
+      fax = '',
+      street = '',
+      city = '',
+      zipCode = '',
+      state = '',
+      country = '',
     } = data as Record<string, string>;
-    const name = `${firstName || ''} ${lastName || ''}`.trim();
-    const address =
-      `${street || ''} ${city || ''} ${zipCode || ''} ${state || ''} ${country || ''}`.trim();
+    const name = `${firstName} ${lastName}`.trim();
+    const address = [street, city, zipCode, state, country]
+      .filter(Boolean)
+      .join(' ')
+      .trim();
 
     const contactData: ContactData = {
       name,
       photo,
-      email: email || '',
-      company: company || '',
-      tel: tel || '',
-      fax: fax || '',
-      jTitle: jTitle || '',
+      email,
+      company,
+      tel,
+      fax,
+      jTitle,
       address,
     };
 
