@@ -23,11 +23,11 @@ export default function CalenderForm({
     description: timezone.replace(/[^a-zA-Z0-9\s]/g, ' '),
   }));
 
-  const [startDate, setStartDate] = useState(
-    parseDateTime(dayjs().format('YYYY-MM-DDTHH:mm:ss'))
+  const [startDate, setStartDate] = useState(() =>
+    parseDateTime(dayjs().second(0).format('YYYY-MM-DDTHH:mm:ss'))
   );
-  const [endDate, setEndDate] = useState(
-    parseDateTime(dayjs().add(1, 'day').format('YYYY-MM-DDTHH:mm:ss'))
+  const [endDate, setEndDate] = useState(() =>
+    parseDateTime(dayjs().add(1, 'day').second(0).format('YYYY-MM-DDTHH:mm:ss'))
   );
   const [isEndDateInvalid, setIsEndDateInvalid] = useState(false);
 
@@ -68,7 +68,7 @@ export default function CalenderForm({
               className='w-full'
               granularity='second'
               label='Start date & time'
-              value={startDate}
+              defaultValue={startDate}
               name='startDate'
               onChange={(value) => value && setStartDate(value)}
               isRequired={true}
@@ -77,7 +77,7 @@ export default function CalenderForm({
               className='w-full'
               granularity='second'
               label='End date & time'
-              value={endDate}
+              defaultValue={endDate}
               name='endDate'
               isRequired={true}
               onChange={(value) => {
