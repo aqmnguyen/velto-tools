@@ -15,7 +15,7 @@
     "@internationalized/date": "3.8.1",
     "@repo/ui": "*",
     "@velto-tools/ics-file": "^1.0.1",
-    "@velto-tools/vcard-file": "workspace:*",
+    "@velto-tools/vcard-file": "^1.0.1",
     "@vercel/blob": "^1.1.1",
     "dayjs": "^1.11.13",
     "framer-motion": "^12.12.1",
