@@ -13,7 +13,7 @@ export default function VCard() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className='flex w-[550px] flex-col items-center gap-5 rounded-large bg-default-50 py-8 shadow-small'>
+        <div className='flex w-[600 px] flex-col items-center gap-5 rounded-large bg-default-50 py-8 shadow-small'>
           <div className='flex w-full flex-col items-center px-8'>
             <IconComponent
               className='mb-3 text-success-500'
