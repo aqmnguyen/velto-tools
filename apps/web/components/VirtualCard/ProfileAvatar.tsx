@@ -1,13 +1,15 @@
 'use client';
 
 import { Avatar, Badge, Button } from '@heroui/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { uploadImage } from '@/actions/uploadImage';
 import { useAvatarStore } from '@/stores/VirtualCard/useAvatarStore';
 
 export default function ProfileAvatar() {
   const { avatarUrl, setAvatarUrl } = useAvatarStore();
+  const [avatarImageUploading, setAvatarImageUploading] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validImageDimensions = async (file: File) => {
@@ -48,7 +50,6 @@ export default function ProfileAvatar() {
       event.target.value = '';
       return;
     }
-
     const isValid = await validImageDimensions(file);
     if (!isValid) {
       alert('Images must be a square and cannot exceed 600x600px');
@@ -56,7 +57,9 @@ export default function ProfileAvatar() {
       return;
     }
 
+    setAvatarImageUploading(true);
     const imageUrl = await uploadImage('avatar', file);
+    setAvatarImageUploading(false);
     if (!imageUrl) {
       alert('Failed to upload image');
       event.target.value = '';
@@ -65,12 +68,15 @@ export default function ProfileAvatar() {
 
     setAvatarUrl(imageUrl);
   };
+
+  const buttonClass = avatarImageUploading ? 'hidden' : 'w-5 h-5';
+
   return (
     <div className='flex gap-4 py-4'>
       <Badge
         showOutline
         classNames={{
-          badge: 'w-5 h-5',
+          badge: buttonClass,
         }}
         color='primary'
         content={
