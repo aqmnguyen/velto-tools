@@ -83,7 +83,7 @@ export default function Navigation() {
         <NavbarMenuItem>
           <Link
             className='w-full hover:text-primary transition-colors'
-            color='primary'
+            color='foreground'
             href='/vcard'
           >
             VCard (vcf)

@@ -1,6 +1,3 @@
-import * as fs from 'fs';
-import * as path from 'path';
-
 interface ContactOptions {
   name: string;
   address: string;
@@ -20,14 +17,35 @@ interface DownloadOptions {
   contentType?: string;
 }
 
+interface VCardResponse {
+  error: boolean;
+  message: string;
+  content: string;
+  headers: {
+    'Content-Type': string;
+    'Content-Disposition': string;
+  };
+}
+
+const VCARD_TEMPLATE: string = `BEGIN:VCARD
+N:%%NAME%%
+ADR;DOM;PARCEL;HOME:%%ADDRESS%%
+EMAIL;INTERNET:%%EMAIL%%
+ORG:%%COMPANY%%
+TEL;FAX;WORK:%%FAX%%
+TEL;HOME:%%TEL%%
+TITLE:%%JTITLE%%
+URL;WORK:%%WURL%%
+URL:%%PURL%%
+PHOTO;ENCODING=b:%%PHOTO%%
+NOTE:%%NOTE%%
+END:VCARD`;
+
 export class VCardGenerator {
   private template: string;
 
   constructor() {
-    this.template = fs.readFileSync(
-      path.join(__dirname, 'template.vcard'),
-      'utf-8'
-    );
+    this.template = VCARD_TEMPLATE;
   }
 
   private escapeText(text: string): string {
@@ -49,7 +67,9 @@ export class VCardGenerator {
   }
 
   async generateVCard(options: ContactOptions): Promise<string> {
-    const photo = await this.convertImgBase64(options.photo);
+    const photo = options.photo
+      ? await this.convertImgBase64(options.photo)
+      : '';
     const vcardContent = this.template
       .replace('%%NAME%%', options.name)
       .replace('%%ADDRESS%%', options.address)
@@ -65,13 +85,13 @@ export class VCardGenerator {
     return vcardContent;
   }
 
-  downloadVCardFile(
+  async downloadVCardFile(
     options: ContactOptions,
     downloadOptions: DownloadOptions = {}
-  ) {
+  ): Promise<VCardResponse> {
     try {
-      const vcardContent = this.generateVCard(options);
-      const filename = downloadOptions.filename || 'contact.vcf';
+      const vcardContent: string = await this.generateVCard(options);
+      const filename: string = downloadOptions.filename || 'contact.vcf';
 
       return {
         error: false,
@@ -86,7 +106,10 @@ export class VCardGenerator {
       return {
         error: true,
         message: e instanceof Error ? e.message : 'Unknown error occurred',
-        headers: {},
+        headers: {
+          'Content-Type': '',
+          'Content-Disposition': '',
+        },
         content: '',
       };
     }
