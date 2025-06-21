@@ -11,7 +11,11 @@ export default function QRCodeWifiForm() {
   const [data, setData] = useState('');
 
   useEffect(() => {
-    setData(`WIFI:S:${ssid};T:${security};P:${password};;`);
+    if (security !== 'No Password') {
+      setData(`WIFI:S:${ssid};T:${security};P:${password};;`);
+    } else {
+      setData(`WIFI:S:${ssid};T:${security};;`);
+    }
   }, [ssid, password, security]);
 
   return (
@@ -31,6 +35,7 @@ export default function QRCodeWifiForm() {
             placeholder='Enter Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={security === 'No Password'}
           />
           <Select
             isRequired
