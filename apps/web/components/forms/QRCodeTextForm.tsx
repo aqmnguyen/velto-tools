@@ -5,7 +5,7 @@ import { useState } from 'react';
 import QRCodeGenerator from '@/components/QRCode/QRCodeGenerator';
 
 export default function QRCodeTextForm() {
-  const [text, setText] = useState('Hello, world!');
+  const [text, setText] = useState<string>('Hello, world!');
 
   return (
     <div className='flex w-full flex-col gap-4'>

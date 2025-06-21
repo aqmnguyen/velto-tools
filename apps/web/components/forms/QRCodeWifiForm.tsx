@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import QRCodeGenerator from '@/components/QRCode/QRCodeGenerator';
 
 export default function QRCodeWifiForm() {
-  const [ssid, setSsid] = useState('');
-  const [password, setPassword] = useState('');
-  const [security, setSecurity] = useState('WPA/WPA2');
-  const [data, setData] = useState('');
+  const [ssid, setSsid] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [security, setSecurity] = useState<string>('WPA/WPA2');
+  const [data, setData] = useState<string>('');
 
   useEffect(() => {
     if (security !== 'No Password') {

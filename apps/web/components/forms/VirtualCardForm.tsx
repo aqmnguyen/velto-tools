@@ -17,9 +17,9 @@ type ContactData = {
 };
 
 export default function VirtualCardForm() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [jobTitle, setJobTitle] = useState<string>('');
   const { avatarUrl: photo } = useAvatarStore();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
