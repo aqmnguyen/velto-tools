@@ -19,8 +19,10 @@ export default function QRCodeGenerator({
   useEffect(() => {
     if (!containerRef.current || !data) return;
 
+    const container = containerRef.current;
+
     // Clear the container first
-    containerRef.current.innerHTML = '';
+    container.innerHTML = '';
 
     // Create new QR code instance
     qrCodeRef.current = new QRCodeStyling({
@@ -36,26 +38,21 @@ export default function QRCodeGenerator({
     });
 
     // Append the QR code to the container
-    qrCodeRef.current.append(containerRef.current);
+    qrCodeRef.current.append(container);
 
     // Cleanup function
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
-      }
+      container.innerHTML = '';
       qrCodeRef.current = null;
     };
   }, [data, width, height]);
 
   return data ? (
-    <div className='items-center justify-center'>
-      <div
-        ref={containerRef}
-        className='max-w-full h-auto mx-auto flex justify-center items-center'
-      />
+    <div className='flex flex-col items-center justify-center'>
+      <div ref={containerRef} style={{ maxWidth: '100%', height: 'auto' }} />
       <Button
         color='primary'
-        className='mt-6 w-full mx-auto'
+        className='mt-6 w-full max-w-xs'
         onPress={() => qrCodeRef.current?.download()}
       >
         Download

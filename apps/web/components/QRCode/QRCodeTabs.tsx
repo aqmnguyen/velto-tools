@@ -3,6 +3,7 @@
 import { Tab, Tabs, Card, CardBody } from '@heroui/react';
 import IconComponent from '@/components/Icon';
 import QRCodeSiteForm from '@/components/forms/QRCodeSiteForm';
+import QRCodeTextForm from '@/components/forms/QRCodeTextForm';
 
 export default function QRCodeTabs() {
   return (
@@ -47,7 +48,7 @@ export default function QRCodeTabs() {
         >
           <Card className='w-full p-2 shadow-none rounded-none outline-none'>
             <CardBody>
-              <div className='max-w-xl p-2'>Static Text</div>
+              <QRCodeTextForm />
             </CardBody>
           </Card>
         </Tab>
