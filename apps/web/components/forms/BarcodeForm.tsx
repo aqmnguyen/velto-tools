@@ -31,7 +31,6 @@ export default function BarcodeForm() {
             </Select>
 
             <Input
-              isRequired
               label='Code'
               placeholder='Enter a code'
               aria-label='Enter a code'
