@@ -4,7 +4,7 @@ import { Avatar, Badge, Button } from '@heroui/react';
 import { useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { uploadImage } from '@/actions/uploadImage';
-import { useAvatarStore } from '@/stores/VirtualCard/useAvatarStore';
+import { useAvatarStore } from '@/lib/stores/VirtualCard/useAvatarStore';
 
 export default function ProfileAvatar() {
   const { avatarUrl, setAvatarUrl } = useAvatarStore();
