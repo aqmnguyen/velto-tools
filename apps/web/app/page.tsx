@@ -3,7 +3,7 @@ import IconComponent from '@/components/Icon';
 import CalenderForm, {
   GoogleCalendarButton,
   GenerateICSAttachmentButton,
-} from '@/components/forms/CalenderForm';
+} from '@/components/Forms/CalenderForm';
 
 export const metadata = {
   title: 'Velto Tools - Attachment Generator',

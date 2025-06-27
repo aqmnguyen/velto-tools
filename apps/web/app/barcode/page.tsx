@@ -1,6 +1,6 @@
 import IconComponent from '@/components/Icon';
 import { Divider } from '@heroui/react';
-import BarcodeForm from '@/components/forms/BarcodeForm';
+import BarcodeForm from '@/components/Forms/BarcodeForm';
 
 export const metadata = {
   title: 'Velto Tools - Attachment Generator',
