@@ -2,7 +2,7 @@
 
 import jsbarcode from 'jsbarcode';
 import { useEffect, useRef } from 'react';
-import { BarcodeFormat } from '@/types/barcode';
+import { BarcodeFormat } from '@/lib/types/barcode';
 
 export default function BarcodeGenerator({
   code = '',

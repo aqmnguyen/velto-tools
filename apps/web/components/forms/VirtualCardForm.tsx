@@ -3,7 +3,7 @@
 import { Button, Input } from '@heroui/react';
 import { useState } from 'react';
 import ProfileAvatar from '@/components/VirtualCard/ProfileAvatar';
-import { useAvatarStore } from '@/stores/VirtualCard/useAvatarStore';
+import { useAvatarStore } from '@/lib/stores/VirtualCard/useAvatarStore';
 
 type ContactData = {
   name: string;

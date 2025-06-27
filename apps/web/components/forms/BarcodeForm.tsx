@@ -3,7 +3,7 @@
 import { Input, Select, SelectItem } from '@heroui/react';
 import { useState } from 'react';
 import BarcodeGenerator from '@/components/Barcode/BarcodeGenerator';
-import { BarcodeFormat } from '@/types/barcode';
+import { BarcodeFormat } from '@/lib/types/barcode';
 
 export default function BarcodeForm() {
   const [format, setFormat] = useState<BarcodeFormat>('code128');
