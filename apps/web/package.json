@@ -19,6 +19,7 @@
     "@vercel/blob": "^1.1.1",
     "dayjs": "^1.11.13",
     "framer-motion": "^12.12.1",
+    "jsbarcode": "^3.12.1",
     "next": "^15.3.0",
     "qr-code-styling": "^1.9.2",
     "react": "^19.1.0",
