@@ -4,17 +4,7 @@ import { Button, Input } from '@heroui/react';
 import { useState } from 'react';
 import ProfileAvatar from '@/components/VirtualCard/ProfileAvatar';
 import { useAvatarStore } from '@/lib/stores/VirtualCard/useAvatarStore';
-
-type ContactData = {
-  name: string;
-  photo: string;
-  email: string;
-  company: string;
-  tel: string;
-  fax: string;
-  jTitle: string;
-  address: string;
-};
+import { ContactData } from '@/lib/types/contact';
 
 export default function VirtualCardForm() {
   const [firstName, setFirstName] = useState<string>('');

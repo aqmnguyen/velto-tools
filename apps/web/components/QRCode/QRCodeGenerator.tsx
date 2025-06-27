@@ -3,16 +3,13 @@
 import { Button } from '@heroui/react';
 import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
+import { QRCodeGeneratorProps } from '@/lib/types/qrcode';
 
 export default function QRCodeGenerator({
   data = '',
   width = 300,
   height = 300,
-}: {
-  data: string;
-  width: number;
-  height: number;
-}) {
+}: QRCodeGeneratorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const qrCodeRef = useRef<QRCodeStyling | null>(null);
 

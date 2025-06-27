@@ -2,9 +2,9 @@
 
 import { Tab, Tabs, Card, CardBody } from '@heroui/react';
 import IconComponent from '@/components/Icon';
-import QRCodeSiteForm from '@/components/forms/QRCodeSiteForm';
-import QRCodeTextForm from '@/components/forms/QRCodeTextForm';
-import QRCodeWifiForm from '@/components/forms/QRCodeWifiForm';
+import QRCodeSiteForm from '@/components/Forms/QRCodeSiteForm';
+import QRCodeTextForm from '@/components/Forms/QRCodeTextForm';
+import QRCodeWifiForm from '@/components/Forms/QRCodeWifiForm';
 
 export default function QRCodeTabs() {
   return (

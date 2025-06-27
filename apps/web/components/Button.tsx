@@ -1,5 +1,6 @@
 'use client';
 import { Button } from '@heroui/react';
+import { ButtonProps } from '@/lib/types/button';
 
 export default function ButtonComponent({
   className,
@@ -7,13 +8,7 @@ export default function ButtonComponent({
   size,
   children,
   onPress,
-}: {
-  className: string;
-  isIconOnly: boolean;
-  size: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  onPress?: () => void;
-}) {
+}: ButtonProps) {
   return (
     <Button
       className={className}

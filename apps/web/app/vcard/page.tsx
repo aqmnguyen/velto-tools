@@ -1,6 +1,6 @@
 import { Divider } from '@heroui/react';
 import IconComponent from '@/components/Icon';
-import VirtualCardForm from '@/components/forms/VirtualCardForm';
+import VirtualCardForm from '@/components/Forms/VirtualCardForm';
 
 export const metadata = {
   title: 'Velto Tools - Attachment Generator',
