@@ -25,8 +25,7 @@ export default function BarcodeGenerator({
           setValidCode(valid);
         },
       });
-    } catch (error) {
-      console.log(error);
+    } catch {
       setValidCode(false);
     }
   }, [code, format]);
