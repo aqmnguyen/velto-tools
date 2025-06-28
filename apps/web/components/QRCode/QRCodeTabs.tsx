@@ -11,7 +11,7 @@ import QRCodeWifiForm from '@/components/Forms/QRCodeWifiForm';
 export default function QRCodeTabs() {
   const handleTabChange = (key: Key) => {
     posthog.capture('qr_code_tab_clicked', {
-      tab_name: String(key),
+      qr_tab_name: String(key),
     });
   };
 

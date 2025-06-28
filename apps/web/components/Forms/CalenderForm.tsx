@@ -173,7 +173,9 @@ export function GenerateGoogleCalendarLink(id: string): string | void {
   });
 
   const calendarUrl = `${baseUrl}?${params.toString()}`;
-  posthog.capture('google_calendar_link_generated', { calendarUrl });
+  posthog.capture('google_calendar_link_generated', {
+    calender_url: calendarUrl,
+  });
   window.open(calendarUrl, '_blank');
   return calendarUrl;
 }
@@ -208,7 +210,7 @@ export async function GenerateICSAttachment(
 
   try {
     posthog.capture('ics_attachment_generated', {
-      formData: new URLSearchParams(formData).toString(),
+      ics_form_data: new URLSearchParams(formData).toString(),
     });
     window.open(
       '/api/ics?' + new URLSearchParams(formData).toString(),

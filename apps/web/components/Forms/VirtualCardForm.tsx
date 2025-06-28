@@ -49,7 +49,7 @@ export default function VirtualCardForm() {
 
     try {
       posthog.capture('vcard_generated', {
-        contactData: new URLSearchParams(contactData).toString(),
+        vcard_contact_data: new URLSearchParams(contactData).toString(),
       });
       window.open(
         `/api/vcard?${new URLSearchParams(contactData).toString()}`,
