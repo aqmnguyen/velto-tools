@@ -174,7 +174,7 @@ export function GenerateGoogleCalendarLink(id: string): string | void {
 
   const calendarUrl = `${baseUrl}?${params.toString()}`;
   posthog.capture('google_calendar_link_generated', {
-    calender_url: calendarUrl,
+    calendar_url: calendarUrl,
   });
   window.open(calendarUrl, '_blank');
   return calendarUrl;
