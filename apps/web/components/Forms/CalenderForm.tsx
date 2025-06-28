@@ -11,6 +11,7 @@ import { Icon } from '@iconify/react';
 import { parseDateTime } from '@internationalized/date';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import posthog from 'posthog-js';
 
 export default function CalenderForm({
   id = 'calender-form',
@@ -172,6 +173,7 @@ export function GenerateGoogleCalendarLink(id: string): string | void {
   });
 
   const calendarUrl = `${baseUrl}?${params.toString()}`;
+  posthog.capture('google_calendar_link_generated', { calendarUrl });
   window.open(calendarUrl, '_blank');
   return calendarUrl;
 }
@@ -205,6 +207,9 @@ export async function GenerateICSAttachment(
   }
 
   try {
+    posthog.capture('ics_attachment_generated', {
+      formData: new URLSearchParams(formData).toString(),
+    });
     window.open(
       '/api/ics?' + new URLSearchParams(formData).toString(),
       '_blank'
