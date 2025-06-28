@@ -22,7 +22,7 @@ export default function QRCodeTextForm() {
           />
         </div>
         <div className='col-span-2'>
-          <QRCodeGenerator data={text} width={200} height={200} />
+          <QRCodeGenerator type='text' data={text} width={200} height={200} />
         </div>
       </div>
     </div>

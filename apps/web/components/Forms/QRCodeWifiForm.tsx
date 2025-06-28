@@ -53,7 +53,7 @@ export default function QRCodeWifiForm() {
           </Select>
         </div>
         <div className='col-span-2'>
-          <QRCodeGenerator data={data} width={200} height={200} />
+          <QRCodeGenerator type='wifi' data={data} width={200} height={200} />
         </div>
       </div>
     </div>

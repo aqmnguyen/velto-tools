@@ -4,8 +4,10 @@ import { Button } from '@heroui/react';
 import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 import { QRCodeGeneratorProps } from '@/lib/types/qrcode';
+import posthog from 'posthog-js';
 
 export default function QRCodeGenerator({
+  type,
   data = '',
   width = 300,
   height = 300,
@@ -50,7 +52,13 @@ export default function QRCodeGenerator({
       <Button
         color='primary'
         className='mt-6 w-full max-w-xs'
-        onPress={() => qrCodeRef.current?.download()}
+        onPress={() => {
+          posthog.capture('qr_code_downloaded', {
+            qr_type: type,
+            qr_data: data,
+          });
+          qrCodeRef.current?.download();
+        }}
       >
         Download
       </Button>

@@ -1,12 +1,20 @@
 'use client';
 
 import { Tab, Tabs, Card, CardBody } from '@heroui/react';
+import { Key } from 'react';
+import posthog from 'posthog-js';
 import IconComponent from '@/components/Icon';
 import QRCodeSiteForm from '@/components/Forms/QRCodeSiteForm';
 import QRCodeTextForm from '@/components/Forms/QRCodeTextForm';
 import QRCodeWifiForm from '@/components/Forms/QRCodeWifiForm';
 
 export default function QRCodeTabs() {
+  const handleTabChange = (key: Key) => {
+    posthog.capture('qr_code_tab_clicked', {
+      qr_tab_name: String(key),
+    });
+  };
+
   return (
     <>
       <Tabs
@@ -16,6 +24,7 @@ export default function QRCodeTabs() {
           tabContent: 'text-small',
         }}
         size='lg'
+        onSelectionChange={handleTabChange}
       >
         <Tab
           key='website-qr-code'

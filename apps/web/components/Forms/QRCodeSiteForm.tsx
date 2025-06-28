@@ -26,7 +26,7 @@ export default function QRCodeSiteForm() {
           />
         </div>
         <div className='col-span-2'>
-          <QRCodeGenerator data={url} width={200} height={200} />
+          <QRCodeGenerator type='website' data={url} width={200} height={200} />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ProfileAvatar from '@/components/VirtualCard/ProfileAvatar';
 import { useAvatarStore } from '@/lib/stores/VirtualCard/useAvatarStore';
 import { ContactData } from '@/lib/types/contact';
+import posthog from 'posthog-js';
 
 export default function VirtualCardForm() {
   const [firstName, setFirstName] = useState<string>('');
@@ -47,6 +48,9 @@ export default function VirtualCardForm() {
     };
 
     try {
+      posthog.capture('vcard_generated', {
+        vcard_contact_data: new URLSearchParams(contactData).toString(),
+      });
       window.open(
         `/api/vcard?${new URLSearchParams(contactData).toString()}`,
         '_blank'
