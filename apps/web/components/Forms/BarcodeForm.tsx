@@ -20,18 +20,20 @@ export default function BarcodeForm() {
               aria-label='Select a format'
               defaultSelectedKeys={['code128']}
               value={format}
+              className='format-select'
               onChange={(e) => setFormat(e.target.value as BarcodeFormat)}
             >
               <SelectItem key='code128'>Code 128</SelectItem>
               <SelectItem key='code39'>Code 39</SelectItem>
               <SelectItem key='ean13'>EAN-13</SelectItem>
               <SelectItem key='ean8'>EAN-8</SelectItem>
-              <SelectItem key='upc_a'>UPC-A</SelectItem>
-              <SelectItem key='upc_e'>UPC-E</SelectItem>
+              <SelectItem key='upc'>UPC (A)</SelectItem>
             </Select>
 
             <Input
+              isRequired
               label='Code'
+              name='code'
               placeholder='Enter a code'
               aria-label='Enter a code'
               value={code}
