@@ -46,19 +46,21 @@ export default function QRCodeGenerator({
     };
   }, [data, width, height]);
 
+  const handleDownload = () => {
+    posthog.capture('qr_code_downloaded', {
+      qr_type: type,
+      qr_data: data,
+    });
+    qrCodeRef.current?.download();
+  };
+
   return data ? (
     <div className='flex flex-col items-center justify-center'>
       <div ref={containerRef} style={{ maxWidth: '100%', height: 'auto' }} />
       <Button
         color='primary'
         className='mt-6 w-full max-w-xs'
-        onPress={() => {
-          posthog.capture('qr_code_downloaded', {
-            qr_type: type,
-            qr_data: data,
-          });
-          qrCodeRef.current?.download();
-        }}
+        onPress={handleDownload}
       >
         Download
       </Button>
