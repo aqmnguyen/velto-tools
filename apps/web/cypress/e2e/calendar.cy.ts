@@ -1,25 +1,9 @@
 describe('Calendar Page', () => {
   beforeEach(() => {
-    // Mock external URLs and API calls
-    cy.intercept('GET', 'https://calendar.google.com/calendar/render*', {
-      statusCode: 200,
-      body: '<html><body>Mock Google Calendar</body></html>',
-    }).as('googleCalendar');
-
-    cy.intercept('GET', '/api/ics*', {
-      statusCode: 200,
-      headers: {
-        'content-type': 'text/calendar',
-      },
-      body: 'BEGIN:VCALENDAR\nVERSION:2.0\nEND:VCALENDAR',
-    }).as('icsApi');
-
-    // Mock window.open to prevent new tabs/windows
+    cy.visit('/');
     cy.window().then((win) => {
       cy.stub(win, 'open').as('windowOpen');
     });
-
-    cy.visit('/');
   });
 
   it('should load the calendar page with correct title and description', () => {
@@ -67,8 +51,13 @@ describe('Calendar Page', () => {
     cy.get('input[name="details"]').should('have.value', testDetails);
   });
 
-  // TODO: Add tests for the form validation
+  it('should direct to Google Calender page when clicked', () => {
+    cy.get('#google-calendar-button').click();
+    cy.get('@windowOpen').should('have.been.called');
+  });
 
-  // TODO: Add tests for the Google Calendar button
-  // TODO: Add tests for the ICS button
+  it('should direct to ICS page when clicked', () => {
+    cy.get('#ics-attachment-button').click();
+    cy.get('@windowOpen').should('have.been.called');
+  });
 });
