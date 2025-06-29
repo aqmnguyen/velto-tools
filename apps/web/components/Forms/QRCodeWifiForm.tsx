@@ -27,7 +27,7 @@ export default function QRCodeWifiForm() {
   }, [ssid, password, security]);
 
   return (
-    <div className='flex w-full flex-col gap-4'>
+    <div id='qr-code-wifi-form' className='flex w-full flex-col gap-4'>
       <div className='grid grid-cols-5 gap-4'>
         <div className='col-span-3 flex flex-col gap-6'>
           <Input
