@@ -1,4 +1,4 @@
-name: E2E + Component Tests (Web via Bun)
+name: E2E + Component Tests (Web)
 
 on:
   pull_request:
