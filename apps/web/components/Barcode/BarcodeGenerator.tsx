@@ -21,7 +21,6 @@ export default function BarcodeGenerator({
       jsbarcode(barcodeRef.current, code, {
         format,
         valid: (valid) => {
-          console.log(valid);
           setValidCode(valid);
         },
       });

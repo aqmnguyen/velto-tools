@@ -53,14 +53,14 @@ describe('Barcode', () => {
     cy.get('p.error-invalid').should('be.visible');
   });
 
-  it.only('should generate a barcode upc when code is present', () => {
+  it('should generate a barcode upc when code is present', () => {
     cy.get('.format-select button').click();
     cy.get('[data-key="upc"]').click();
     cy.get('input[name="code"]').clear().type('012345678905');
     cy.get('svg').should('be.visible');
   });
 
-  it.only('should not generate a barcode ean8 when code is not valid', () => {
+  it('should not generate a barcode ean8 when code is not valid', () => {
     cy.get('.format-select button').click();
     cy.get('[data-key="upc"]').click();
     cy.get('input[name="code"]').clear().type('1234');
