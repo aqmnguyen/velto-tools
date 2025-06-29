@@ -4,6 +4,7 @@ describe('Navigation Component', () => {
   it('renders all desktop links', () => {
     cy.viewport(1024, 768);
     cy.mount(<Navigation />);
+
     cy.get('a[href="/"]').contains('ICS File').should('be.visible');
     cy.get('a[href="/vcard"]').contains('VCard').should('be.visible');
     cy.get('a[href="/qrcode"]').contains('QR Code').should('be.visible');
@@ -12,13 +13,9 @@ describe('Navigation Component', () => {
 
   it('toggles mobile menu', () => {
     cy.viewport(375, 667);
-
     cy.mount(<Navigation />);
-
-    // Open mobile menu
     cy.get('.mobile-menu-toggle').click();
 
-    // Assert mobile links are shown
     cy.get('.mobile-menu a[href="/"]')
       .contains('ICS File')
       .should('be.visible');
