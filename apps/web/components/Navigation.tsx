@@ -22,7 +22,7 @@ export default function Navigation() {
       height='60px'
     >
       <NavbarBrand>
-        <NavbarMenuToggle className='mr-2 h-6 sm:hidden' />
+        <NavbarMenuToggle className='mr-2 h-6 sm:hidden mobile-menu-toggle' />
         <Link
           href='/'
           className='text-inherit hover:text-primary transition-colors'
@@ -53,7 +53,7 @@ export default function Navigation() {
         <NavbarItem>
           <Link
             className='flex gap-2 text-inherit hover:text-primary transition-colors'
-            href='qrcode'
+            href='/qrcode'
           >
             QR Code
           </Link>
@@ -61,7 +61,7 @@ export default function Navigation() {
         <NavbarItem>
           <Link
             className='flex gap-2 text-inherit hover:text-primary transition-colors'
-            href='barcode'
+            href='/barcode'
           >
             Barcode
           </Link>
@@ -69,7 +69,7 @@ export default function Navigation() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu>
+      <NavbarMenu className='mobile-menu'>
         <NavbarMenuItem>
           <Link
             className='w-full hover:text-primary transition-colors'
