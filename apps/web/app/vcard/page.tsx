@@ -3,9 +3,46 @@ import IconComponent from '@/components/Icon';
 import VirtualCardForm from '@/components/Forms/VirtualCardForm';
 
 export const metadata = {
-  title: 'Velto Tools - Attachment Generator',
+  title:
+    'Virtual Business Card Generator - Create vCard for Yourself or Another Person | Velto Tools',
   description:
-    'Create a virtual business card (vcard / vcf) for yourself or another person.',
+    'Free online virtual business card generator. Create a virtual business card (vCard / vcf) for yourself or another person. Download as PNG, SVG, or PDF.',
+  openGraph: {
+    title:
+      'Virtual Business Card Generator - Create vCard for Yourself or Another Person | Velto Tools',
+    description:
+      'Free online virtual business card generator. Create a virtual business card (vCard / vcf) for yourself or another person. Download as PNG, SVG, or PDF.',
+    type: 'website',
+    url: 'https://www.velto-tools.com/vcard',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title:
+      'Virtual Business Card Generator - Create vCard for Yourself or Another Person',
+    description:
+      'Free online virtual business card generator. Create a virtual business card (vCard / vcf) for yourself or another person.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    'virtual business card generator',
+    'vcard generator',
+    'vcf generator',
+    'vcard generator online',
+    'vcf generator online',
+    'vcard generator free',
+    'vcf generator free',
+    'vcard generator tool',
+    'vcf generator tool',
+    'vcard generator app',
+    'vcf generator app',
+    'vcard generator website',
+    'vcf generator website',
+    'vcard generator software',
+    'vcf generator software',
+  ],
 };
 
 export default function VCard() {
