@@ -183,6 +183,7 @@ export function GenerateGoogleCalendarLink(id: string): string | void {
 export function GoogleCalendarButton() {
   return (
     <Button
+      id='google-calendar-button'
       className='bg-default-100'
       isIconOnly={true}
       size='sm'
@@ -224,6 +225,7 @@ export async function GenerateICSAttachment(
 export function GenerateICSAttachmentButton() {
   return (
     <Button
+      id='ics-attachment-button'
       className='bg-default-100'
       isIconOnly={true}
       size='sm'

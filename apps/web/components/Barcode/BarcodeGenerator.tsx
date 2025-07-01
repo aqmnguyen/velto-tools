@@ -21,7 +21,6 @@ export default function BarcodeGenerator({
       jsbarcode(barcodeRef.current, code, {
         format,
         valid: (valid) => {
-          console.log(valid);
           setValidCode(valid);
         },
       });
@@ -38,10 +37,10 @@ export default function BarcodeGenerator({
       />
       {(!code || !format || !validCode) && (
         <div className='flex flex-col items-center justify-center mt-2'>
-          <p className='text-sm text-red-500'>
+          <p className='error-empty text-sm text-red-500'>
             {!code || !format ? 'Please enter a code and select a format' : ''}
           </p>
-          <p className='text-sm text-red-500'>
+          <p className='error-invalid text-sm text-red-500'>
             {!validCode && code && format
               ? `Invalid code ${code} for format ${format}`
               : ''}

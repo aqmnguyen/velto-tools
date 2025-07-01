@@ -8,7 +8,7 @@ export default function QRCodeTextForm() {
   const [text, setText] = useState<string>('Hello, world!');
 
   return (
-    <div className='flex w-full flex-col gap-4'>
+    <div id='qr-code-text-form' className='flex w-full flex-col gap-4'>
       <div className='grid grid-cols-5 gap-4'>
         <div className='col-span-3'>
           <Input

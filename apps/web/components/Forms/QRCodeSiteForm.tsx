@@ -12,7 +12,7 @@ export default function QRCodeSiteForm() {
   };
 
   return (
-    <div className='flex w-full flex-col gap-4'>
+    <div id='qr-code-site-form' className='flex w-full flex-col gap-4'>
       <div className='grid grid-cols-5 gap-4'>
         <div className='col-span-3'>
           <Input

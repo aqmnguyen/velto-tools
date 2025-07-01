@@ -10,7 +10,7 @@ export const metadata = {
 export default function BarcodePage() {
   return (
     <>
-      <div className='flex w-full flex-col items-center px-8'>
+      <div id='barcode' className='flex w-full flex-col items-center px-8'>
         <IconComponent
           className='mb-3 text-success-500'
           icon='mdi:barcode-scan'
