@@ -13,8 +13,8 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import posthog from 'posthog-js';
 
-export default function CalenderForm({
-  id = 'calender-form',
+export default function CalendarForm({
+  id = 'calendar-form',
 }: {
   id?: string;
 }) {
@@ -187,7 +187,7 @@ export function GoogleCalendarButton() {
       className='bg-default-100'
       isIconOnly={true}
       size='sm'
-      onPress={() => GenerateGoogleCalendarLink('calender-form')}
+      onPress={() => GenerateGoogleCalendarLink('calendar-form')}
     >
       <Icon className='text-default-600' icon='mdi:google' width={16} />
     </Button>
@@ -229,7 +229,7 @@ export function GenerateICSAttachmentButton() {
       className='bg-default-100'
       isIconOnly={true}
       size='sm'
-      onPress={() => GenerateICSAttachment('calender-form')}
+      onPress={() => GenerateICSAttachment('calendar-form')}
     >
       <Icon className='text-default-600' icon='mdi:calendar' width={16} />
     </Button>

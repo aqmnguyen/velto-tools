@@ -9,7 +9,7 @@ describe('Calendar Page', () => {
   it('should load the calendar page with correct title and description', () => {
     cy.get('#add-to-calendar p')
       .eq(0)
-      .should('contain', 'Create a Calender Invitation');
+      .should('contain', 'Create a Calendar Invitation');
     cy.get('#add-to-calendar p')
       .eq(1)
       .should(
@@ -51,7 +51,7 @@ describe('Calendar Page', () => {
     cy.get('input[name="details"]').should('have.value', testDetails);
   });
 
-  it('should direct to Google Calender page when clicked', () => {
+  it('should direct to Google Calendar page when clicked', () => {
     cy.get('#google-calendar-button').click();
     cy.get('@windowOpen').should('have.been.called');
   });

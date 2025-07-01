@@ -3,8 +3,40 @@ import { Divider } from '@heroui/react';
 import BarcodeForm from '@/components/Forms/BarcodeForm';
 
 export const metadata = {
-  title: 'Velto Tools - Attachment Generator',
-  description: 'Generate a Barcode in various formats.',
+  title:
+    'Barcode Generator - Create QR Codes, Code 128, EAN-13 & More | Velto Tools',
+  description:
+    'Free online barcode generator. Create QR codes, Code 128, EAN-13, UPC-A, and other barcode formats instantly. Download as PNG, SVG, or PDF. Perfect for inventory, retail, and business applications.',
+  openGraph: {
+    title:
+      'Barcode Generator - Create QR Codes, Code 128, EAN-13 & More | Velto Tools',
+    description:
+      'Free online barcode generator. Create QR codes, Code 128, EAN-13, UPC-A, and other barcode formats instantly. Download as PNG, SVG, or PDF.',
+    type: 'website',
+    url: 'https://www.velto-tools.com/barcode',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Barcode Generator - Create QR Codes, Code 128, EAN-13 & More',
+    description:
+      'Free online barcode generator. Create QR codes, Code 128, EAN-13, UPC-A, and other barcode formats instantly.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    'barcode generator',
+    'QR code generator',
+    'Code 128',
+    'EAN-13',
+    'UPC-A',
+    'barcode creator',
+    'free barcode tool',
+    'online barcode maker',
+    'inventory barcodes',
+    'retail barcodes',
+  ],
 };
 
 export default function BarcodePage() {
