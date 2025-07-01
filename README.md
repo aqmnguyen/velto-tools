@@ -1,84 +1,248 @@
-# Turborepo starter
+# Velto Tools - Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern monorepo containing free online utility tools for everyday tasks. Built with Next.js, TypeScript, and Turborepo for optimal development experience.
 
-## Using this example
+![Velto Tools](https://img.shields.io/badge/Next.js-15.3.0-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue?style=for-the-badge&logo=typescript)
+![Turborepo](https://img.shields.io/badge/Turborepo-2.5.3-black?style=for-the-badge&logo=turborepo)
+![Bun](https://img.shields.io/badge/Bun-1.2.0-black?style=for-the-badge&logo=bun)
 
-Run the following command:
+## 🏗️ Monorepo Structure
 
-```sh
-npx create-turbo@latest
+This monorepo is organized using [Turborepo](https://turborepo.com/) and contains multiple applications and shared packages:
+
+### 📱 Applications (`apps/`)
+
+- **`web`** - Main Next.js web application with all utility tools
+  - Calendar invitation generator
+  - QR code generator
+  - Barcode generator
+  - Virtual business card generator
+- **`api`** - Backend API services for file generation
+- **`docs`** - Documentation site built with Next.js
+
+### 📦 Packages (`packages/`)
+
+- **`@velto-tools/ics-file`** - ICS calendar file generation utilities
+- **`@velto-tools/vcard-file`** - vCard file generation utilities
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18 or higher
+- [Bun](https://bun.sh/) 1.2.0 (recommended) or npm/yarn
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd velto-tools
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   bun install
+   # or
+   npm install
+   ```
+
+3. **Start development servers**
+
+   ```bash
+   bun dev
+   # or
+   npm run dev
+   ```
+
+4. **Access the applications**
+   - Web App: [http://localhost:3000](http://localhost:3000)
+   - API: [http://localhost:3001](http://localhost:3001)
+   - Docs: [http://localhost:3002](http://localhost:3002)
+
+## 🛠️ Available Scripts
+
+### Root Level Commands
+
+- `bun dev` - Start all development servers
+- `bun build` - Build all applications and packages
+- `bun lint` - Lint all applications and packages
+- `bun check-types` - Run TypeScript type checking across all packages
+- `bun format` - Format all code with Prettier
+
+### Application-Specific Commands
+
+```bash
+# Web application
+bun --filter web dev
+bun --filter web build
+bun --filter web lint
+
+# API application
+bun --filter api dev
+bun --filter api build
+
+# Documentation
+bun --filter docs dev
+bun --filter docs build
 ```
 
-## What's inside?
+## 🔧 Development Workflow
 
-This Turborepo includes the following packages/apps:
+### Adding New Features
 
-### Apps and Packages
+1. **Create a feature branch**
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+   ```bash
+   git checkout -b feature/new-tool
+   ```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+2. **Develop in the appropriate app/package**
 
-### Utilities
+   - Web features: `apps/web/`
+   - API endpoints: `apps/api/`
+   - Shared utilities: `packages/`
 
-This Turborepo has some additional tools already setup for you:
+3. **Test your changes**
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   ```bash
+   bun run lint
+   bun run check-types
+   bun run build
+   ```
 
-### Build
+4. **Commit and push**
+   ```bash
+   git add .
+   git commit -m "feat: add new tool"
+   git push origin feature/new-tool
+   ```
 
-To build all apps and packages, run the following command:
+### Working with Packages
 
+#### Using Shared Packages
+
+```typescript
+// In apps/web/
+import { generateICS } from '@velto-tools/ics-file';
+import { generateVCard } from '@velto-tools/vcard-file';
+import { Button } from '@repo/ui';
 ```
-cd my-turborepo
-pnpm build
+
+#### Publishing Packages
+
+```bash
+# Build all packages
+bun run build
+
+# Publish specific package
+cd packages/ics-file
+bun publish
 ```
 
-### Develop
+## 🧪 Testing
 
-To develop all apps and packages, run the following command:
+### Run All Tests
 
+```bash
+bun run test
 ```
-cd my-turborepo
-pnpm dev
+
+### Application-Specific Tests
+
+```bash
+# Web app tests
+bun --filter web cypress:run:e2e
+bun --filter web cypress:run:ct
+
+# Package tests
+bun --filter ics-file test
+bun --filter vcard-file test
 ```
+
+## 🚀 Deployment
+
+### Web Application
+
+- Deployed on [Vercel](https://vercel.com/)
+- Automatic deployments on main branch pushes
+- Environment variables configured in Vercel dashboard
+
+## 📦 Package Publishing
+
+### ICS File Package
+
+```bash
+cd packages/ics-file
+bun run build
+bun publish
+```
+
+### VCard File Package
+
+```bash
+cd packages/vcard-file
+bun run build
+bun publish
+```
+
+## 🔍 Turborepo Features
 
 ### Remote Caching
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+Enable remote caching for faster builds across your team:
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
+```bash
 npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
 npx turbo link
 ```
 
-## Useful Links
+### Task Filtering
 
-Learn more about the power of Turborepo:
+Run tasks on specific packages:
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+```bash
+# Only build web app
+bun turbo build --filter=web
+
+# Build web and its dependencies
+bun turbo build --filter=web...
+
+# Build packages that depend on ui
+bun turbo build --filter=...ui
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and linting
+5. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Development Guidelines
+
+- Follow TypeScript best practices
+- Use ESLint and Prettier for code formatting
+- Write tests for new features
+- Update documentation as needed
+- Follow conventional commit messages
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/your-org/velto-tools/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-org/velto-tools/discussions)
+- **Documentation**: [https://velto-tools.com/docs](https://velto-tools.com/docs)
+
+---
+
+**Built with ❤️ by the Velto Tools team**
