@@ -34,7 +34,7 @@ export default function CalendarForm({
 
   const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return (
-    <div className='flex w-full flex-col items-center gap-4 px-8'>
+    <div className='flex w-full flex-col items-center gap-4 px-8 sm:px-4'>
       <form id={id} className='flex w-full flex-col gap-4'>
         <div className='flex w-full flex-col gap-1'>
           <p className='text-small font-medium' aria-label='title'>
