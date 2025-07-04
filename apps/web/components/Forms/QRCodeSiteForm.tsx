@@ -13,8 +13,8 @@ export default function QRCodeSiteForm() {
 
   return (
     <div id='qr-code-site-form' className='flex w-full flex-col gap-4'>
-      <div className='grid grid-cols-5 gap-4'>
-        <div className='col-span-3'>
+      <div className='grid grid-cols-1 md:grid-cols-5 gap-4'>
+        <div className='col-span-1 md:col-span-3'>
           <Input
             isRequired
             placeholder='Enter URL'
@@ -25,7 +25,7 @@ export default function QRCodeSiteForm() {
             onChange={handleUrlChange}
           />
         </div>
-        <div className='col-span-2'>
+        <div className='col-span-1 md:col-span-2 flex justify-center'>
           <QRCodeGenerator type='website' data={url} width={200} height={200} />
         </div>
       </div>

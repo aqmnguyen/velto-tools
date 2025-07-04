@@ -20,7 +20,8 @@ export default function QRCodeTabs() {
       <Tabs
         classNames={{
           base: 'w-full',
-          tabList: 'mx-4 mt-6 text-medium w-full justify-center',
+          tabList:
+            'mx-4 mt-6 text-medium w-full grid grid-cols-2 md:flex md:justify-center gap-2 md:gap-4',
           tabContent: 'text-small',
         }}
         size='lg'
