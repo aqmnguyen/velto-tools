@@ -50,7 +50,7 @@ export const icsRoutes = async (fastify: FastifyInstance) => {
         console.log('Query parameters:', request.query);
 
         const icsGenerator = new ICSGenerator();
-        const result = icsGenerator.downloadICSFile(
+        const result = await icsGenerator.downloadICSFile(
           {
             startDate: new Date(startDate),
             endDate: new Date(endDate),

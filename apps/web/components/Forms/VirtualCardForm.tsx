@@ -61,7 +61,7 @@ export default function VirtualCardForm() {
   };
 
   return (
-    <div className='flex w-full px-8'>
+    <div className='flex w-full px-8 sm:px-4'>
       <form
         className='flex w-full flex-col items-center gap-4'
         onSubmit={handleSubmit}
@@ -87,7 +87,7 @@ export default function VirtualCardForm() {
         </p>
 
         <div className='flex w-full flex-col gap-6'>
-          <div className='grid grid-cols-2 gap-6'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
             {/* First Name */}
             <Input
               isRequired
@@ -114,7 +114,7 @@ export default function VirtualCardForm() {
             type='email'
             name='email'
           />
-          <div className='grid grid-cols-2 gap-6'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
             {/* Phone Number */}
             <Input
               isRequired

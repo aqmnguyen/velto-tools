@@ -10,7 +10,7 @@ export default function BarcodeForm() {
   const [code, setCode] = useState<string>('1234567890');
 
   return (
-    <div className='flex w-full px-8'>
+    <div className='flex w-full px-8 sm:px-4'>
       <div className='flex w-full flex-col items-center gap-4'>
         <div className='flex w-full flex-col gap-6'>
           <div className='grid grid-cols-2 gap-6'>

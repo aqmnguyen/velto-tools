@@ -72,7 +72,7 @@ export const vcardRoutes = async (fastify: FastifyInstance) => {
         };
 
         const vcardGenerator = new VCardGenerator();
-        const result = vcardGenerator.downloadVCardFile(
+        const result = await vcardGenerator.downloadVCardFile(
           {
             name: name || '',
             address: address || '',

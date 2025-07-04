@@ -32,7 +32,7 @@ export default function RootLayout({
           <Navigation />
           <div className={styles.page}>
             <main className={styles.main}>
-              <div className='flex w-[700px] flex-col items-center gap-5 rounded-large bg-default-50 py-8 shadow-small'>
+              <div className='flex w-full sm:w-[700px] mx-auto px-4 sm:px-0 flex-col items-center gap-5 rounded-large bg-default-50 py-6 sm:py-8 shadow-small'>
                 {children}
               </div>
             </main>

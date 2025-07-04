@@ -28,8 +28,8 @@ export default function QRCodeWifiForm() {
 
   return (
     <div id='qr-code-wifi-form' className='flex w-full flex-col gap-4'>
-      <div className='grid grid-cols-5 gap-4'>
-        <div className='col-span-3 flex flex-col gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-5 gap-4'>
+        <div className='col-span-1 md:col-span-3 flex flex-col gap-6'>
           <Input
             isRequired
             label='SSID'
@@ -63,7 +63,7 @@ export default function QRCodeWifiForm() {
             <SelectItem key='No Password'>No Password</SelectItem>
           </Select>
         </div>
-        <div className='col-span-2'>
+        <div className='col-span-1 md:col-span-2 flex justify-center'>
           <QRCodeGenerator type='wifi' data={data} width={200} height={200} />
         </div>
       </div>
