@@ -9,9 +9,21 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
   Link,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Avatar,
+  Badge,
 } from '@heroui/react';
 
+import { useSessionStore } from '@/lib/stores/User/userSessionStore';
+import { User } from '@/lib/types/user';
+import { createClient } from '@/utils/supabase/client';
+
 export default function Navigation() {
+  const { user } = useSessionStore();
+
   return (
     <Navbar
       classNames={{
@@ -68,6 +80,20 @@ export default function Navigation() {
         </NavbarItem>
       </NavbarContent>
 
+      <NavbarContent
+        className='ml-auto flex h-12 max-w-fit items-center gap-0 rounded-full p-0 lg:bg-content2 lg:px-1 lg:dark:bg-content1'
+        justify='end'
+      >
+        {/* Profile */}
+        <NavbarItem className='px-2'>
+          {user ? (
+            <LoggedInUserNavItem user={user} />
+          ) : (
+            <LoggedOutUserNavItem />
+          )}
+        </NavbarItem>
+      </NavbarContent>
+
       {/* Mobile Menu */}
       <NavbarMenu className='mobile-menu'>
         <NavbarMenuItem>
@@ -108,5 +134,58 @@ export default function Navigation() {
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
+  );
+}
+
+function LoggedOutUserNavItem() {
+  return (
+    <Link href='/login'>
+      <button className='mt-1 h-8 w-8 transition-transform'>
+        <Badge
+          color='success'
+          content=''
+          placement='bottom-right'
+          shape='circle'
+        >
+          <Avatar size='sm' />
+        </Badge>
+      </button>
+    </Link>
+  );
+}
+
+function LoggedInUserNavItem({ user }: { user: User }) {
+  const supabase = createClient();
+
+  const handleLogout = () => {
+    supabase.auth.signOut();
+  };
+
+  return (
+    <Dropdown placement='bottom-end'>
+      <DropdownTrigger>
+        <button className='mt-1 h-8 w-8 transition-transform'>
+          <Badge
+            color='success'
+            content=''
+            placement='bottom-right'
+            shape='circle'
+          >
+            <Avatar size='sm' src={user?.user_metadata?.avatar_url} />
+          </Badge>
+        </button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label='Profile Actions' variant='flat'>
+        <DropdownItem key='profile' className='h-14 gap-2'>
+          <p className='font-semibold'>Signed in as</p>
+          <p className='font-semibold'>{user?.email}</p>
+        </DropdownItem>
+        <DropdownItem key='settings'>My Profile</DropdownItem>
+        <DropdownItem key='team_settings'>Saved Tools</DropdownItem>
+        <DropdownItem key='logout' color='danger' onPress={handleLogout}>
+          Log Out
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   );
 }
