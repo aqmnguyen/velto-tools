@@ -15,7 +15,7 @@ export default function Navigation() {
   return (
     <Navbar
       classNames={{
-        base: 'lg:bg-transparent lg:backdrop-filter-none',
+        base: 'backdrop-blur-none backdrop-saturate-100 bg-transparent',
         item: 'data-[active=true]:text-primary',
         wrapper: 'px-4 sm:px-6',
       }}
@@ -31,7 +31,7 @@ export default function Navigation() {
         </Link>
       </NavbarBrand>
       <NavbarContent
-        className='ml-4 hidden h-12 w-full max-w-fit gap-4 rounded-full bg-content2 px-4 dark:bg-content1 sm:flex'
+        className='ml-4 hidden h-12 w-full max-w-fit gap-4 rounded-full bg-content2 px-4 sm:flex'
         justify='start'
       >
         <NavbarItem>
@@ -69,10 +69,10 @@ export default function Navigation() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu className='mobile-menu'>
+      <NavbarMenu className='mobile-menu bg-content2'>
         <NavbarMenuItem>
           <Link
-            className='w-full hover:text-primary transition-colors'
+            className='w-full hover:text-primary transition-colors dark:text-white'
             color='foreground'
             href='/'
           >
@@ -81,7 +81,7 @@ export default function Navigation() {
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link
-            className='w-full hover:text-primary transition-colors'
+            className='w-full hover:text-primary transition-colors dark:text-white'
             color='foreground'
             href='/vcard'
           >
@@ -90,7 +90,7 @@ export default function Navigation() {
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link
-            className='w-full hover:text-primary transition-colors'
+            className='w-full hover:text-primary transition-colors dark:text-white'
             color='foreground'
             href='/qrcode'
           >
@@ -99,7 +99,7 @@ export default function Navigation() {
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link
-            className='w-full hover:text-primary transition-colors'
+            className='w-full hover:text-primary transition-colors dark:text-white'
             color='foreground'
             href='/barcode'
           >

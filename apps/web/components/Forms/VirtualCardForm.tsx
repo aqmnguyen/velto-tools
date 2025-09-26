@@ -96,6 +96,7 @@ export default function VirtualCardForm() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               name='firstName'
+              className='[&_input]:text-[#3F3F46] dark:[&_input]:text-[#3F3F46]'
             />
             {/* Last Name */}
             <Input
