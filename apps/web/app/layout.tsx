@@ -1,7 +1,6 @@
 import localFont from 'next/font/local';
 import { Providers } from '@/components/Providers';
 import Navigation from '@/components/Navigation';
-import { ThemeDebug } from '@/components/ThemeDebug';
 import '@/styles/globals.css';
 import styles from '@/styles/page.module.css';
 
@@ -26,7 +25,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} text-foreground bg-background`}
       >
         <Providers>
-          <ThemeDebug />
           <Navigation />
           <div className={styles.page}>
             <main className={styles.main}>
