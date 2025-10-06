@@ -3,6 +3,7 @@ import { Providers } from '@/components/Providers';
 import Navigation from '@/components/Navigation';
 import '@/styles/globals.css';
 import styles from '@/styles/page.module.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,6 +35,7 @@ export default function RootLayout({
             </main>
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
