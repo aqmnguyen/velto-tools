@@ -9,7 +9,7 @@ import {
 } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { parseDateTime } from '@internationalized/date';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import posthog from 'posthog-js';
 
@@ -31,8 +31,12 @@ export default function CalendarForm({
     parseDateTime(dayjs().add(1, 'day').second(0).format('YYYY-MM-DDTHH:mm:ss'))
   );
   const [isEndDateInvalid, setIsEndDateInvalid] = useState(false);
+  const [currentTimezone, setCurrentTimezone] = useState<string>('UTC');
 
-  const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  useEffect(() => {
+    setCurrentTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
+
   return (
     <div className='flex w-full flex-col items-center gap-4 px-8 sm:px-4'>
       <form id={id} className='flex w-full flex-col gap-4'>
